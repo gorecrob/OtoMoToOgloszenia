@@ -2,7 +2,7 @@ import urllib.request
 import smtplib
 from datetime import datetime
 
-u = 'http://http://otomoto.pl/osobowe/slaskie/ford/fiesta/mk7-2008/?search%5Bfilter_float_price%3Ato%5D=30000&search%5Bfilter_float_mileage%3Ato%5D=125000&search%5Bfilter_enum_damaged%5D=0&search%5Bfilter_float_door_count%3Afrom%5D=5&search%5Bfilter_enum_no_accident%5D=1&search%5Border%5D=filter_float_price%3Aasc'
+u = 'http://otomoto.pl/osobowe/slaskie/ford/fiesta/mk7-2008/?search%5Bfilter_float_price%3Ato%5D=30000&search%5Bfilter_float_mileage%3Ato%5D=125000&search%5Bfilter_enum_damaged%5D=0&search%5Bfilter_float_door_count%3Afrom%5D=5&search%5Bfilter_enum_no_accident%5D=1&search%5Border%5D=filter_float_price%3Aasc'
 f = urllib.request.urlopen(u)
 contents = str(f.read())
 f.close()
@@ -13,10 +13,11 @@ ilosc_olgoszen = 0
 ilosc_nowych = 0
 kryteria = 'kryteria: <strong>'
 ogloszenia = '<h3 class="om-title"><a href="http://otomoto.pl/'
+linkogl = 'http://otomoto.pl/'
 lista = []
 listaNowych = []
 listaStarych = []
-ogloszeniaOld = ('/home/pi/ogloszeniaOldFiesta.txt')
+ogloszeniaOld = ('/home/pi/OtoMoToOgloszenia/ogloszeniaOldFiesta.txt')
 
 def wczytajOgloszenia ():
     global u,i,j,contents,counter, ilosc_ogloszen, kryteria, ogloszenia, lista
@@ -25,17 +26,17 @@ def wczytajOgloszenia ():
     #    if i == -1:
     #        print ('Nie znaleziono')
     #        break
-#        print ('Znaleziono ogłoszeń:')
+    #     print ('Znaleziono ogłoszeń:')
     #    end_ilosc = contents.find('<',i+18)
     #    ilosc_ogloszen = int(contents[i+18:end_ilosc])   
-#        print (ilosc_ogloszen)
+    #    print (ilosc_ogloszen)
     #    break
     while True:
         j = contents.find (ogloszenia, j)
         if j == -1:
             break
         koniec_linku = contents.find('>',j + len(ogloszenia))
-        lista.insert(counter,  ('http://'+ ogloszenia + contents[j+len(ogloszenia):koniec_linku - 1]+ '\n'))
+        lista.insert(counter,  (linkogl + contents[j+len(ogloszenia):koniec_linku - 1]+ '\n'))
         j = koniec_linku 
         counter = counter + 1
 
