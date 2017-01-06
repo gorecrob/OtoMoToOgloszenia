@@ -89,7 +89,7 @@ def sendMail ():
         return
 
     gmail_user = "raspberry.bencol@gmail.com"
-    gmail_pwd = "Snowboard2"
+    gmail_pwd = ""
     FROM = 'raspberry.bencol@gmail.com'
     TO = ['robert.gorecki@gmail.com'] #must be a list
     time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
